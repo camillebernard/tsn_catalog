@@ -15,11 +15,11 @@
 }
 
 #wms_request {
-float:left;
-margin-left:50px;
-left: 10px;
-width: 700px;
-height: 100px;
+	float: left;
+	margin-left: 50px;
+	left: 10px;
+	width: 700px;
+	height: 100px;
 }
 
 .column {
@@ -185,23 +185,23 @@ table.featureInfo caption {
 <body>
 	<div id="toolbar" style="display: block;">
 		<ul>
-			<li><a>WMS version:</a> <select id="wmsVersionSelector"
-				onchange="setWMSVersion(value)">
+			<li class="hide"><a>WMS version:</a> <select
+				id="wmsVersionSelector" onchange="setWMSVersion(value)">
 					<option value="1.1.1" selected="selected">1.1.1</option>
 					<option value="1.3.0">1.3.0</option>
 			</select></li>
-			<li><a>Tiling:</a> <select id="tilingModeSelector"
+			<li class="hide"><a>Tiling:</a> <select id="tilingModeSelector"
 				onchange="setTileMode(value)">
 					<option value="untiled" selected="selected">Single tile</option>
 					<option value="tiled">Tiled</option>
 			</select></li>
-			<li><a>Antialias:</a> <select id="antialiasSelector"
-				onchange="setAntialiasMode(value)">
+			<li class="hide"><a>Antialias:</a> <select
+				id="antialiasSelector" onchange="setAntialiasMode(value)">
 					<option value="full" selected="selected">Full</option>
 					<option value="text">Text only</option>
 					<option value="none">Disabled</option>
 			</select></li>
-			<li><a>Format:</a> <select id="imageFormatSelector"
+			<li class="hide"><a>Format:</a> <select id="imageFormatSelector"
 				onchange="setImageFormat(value)">
 					<option value="image/png" selected="selected">PNG 24bit</option>
 					<option value="image/png8">PNG 8bit</option>
@@ -209,11 +209,11 @@ table.featureInfo caption {
 					<option id="jpeg" value="image/jpeg">JPEG</option>
 					<option id="jpeg-png" value="image/vnd.jpeg-png">JPEG-PNG</option>
 			</select></li>
-			<li><a>Styles:</a> <select id="imageFormatSelector"
+			<li class="hide"><a>Styles:</a> <select id="imageFormatSelector"
 				onchange="setStyle(value)">
 					<option value="" selected="selected">Default</option>
 			</select></li>
-			<li><a>Width/Height:</a> <select id="widthSelector"
+			<li class="hide"><a>Width/Height:</a> <select id="widthSelector"
 				onchange="setWidth(value)">
 					<!--
              These values come from a statistics of the viewable area given a certain screen area
@@ -240,15 +240,38 @@ table.featureInfo caption {
 					<option value="900">900</option>
 					<option value="1000">1000</option>
 			</select></li>
-			<li><a>Filter:</a> <select id="filterType">
-					<option value="cql" selected="selected">CQL</option>
-					<option value="ogc">OGC</option>
-					<option value="fid">FeatureID</option>
-			</select> <input size="80" id="filter" value="unit_name ='Mid-West'"
-				type="text"> <a id="updateFilterButton" href="#"
-				onclick="updateFilter()" title="Apply filter">Apply</a> <a
-				id="resetFilterButton" href="#" onclick="resetFilter()"
-				title="Reset filter">Reset</a></li>
+			<li><b>Filters:</b></li>
+			<li><a>TSN version:</a> <select id="filtre_tsn_version">
+					<option value="">-- select an option --</option>
+					<option value="1999">NUTS 1999</option>
+					<option value="2003">NUTS 2003</option>
+					<option value="2006">NUTS 2006</option>
+					<option value="2010">NUTS 2010</option>
+			</select></li>
+
+			<li><a>TSN level:</a> <select id="filtre_tsn_level">
+					<option value="">-- select an option --</option>
+					<option value="-1">NUTS Level Territory</option>
+					<option value="0">NUTS Level 0 (states regions)</option>
+					<option value="1">NUTS Level 1 (major socio-economic
+						regions)</option>
+					<option value="2">NUTS Level 2 (basic regions)</option>
+					<option value="3">NUTS Level 3 (small regions )</option>
+			</select></li>
+			<li><select id="filterType">
+					<option value="fid" selected="selected">Unit Version ID</option>
+					<option value="id_unit_nomenclature">Unit NUTS ID</option>
+					<option value="unit_name">Unit name</option>
+					<!-- 					<option value="idnomenclature_version">TSN version</option> -->
+					<!-- 					<option value="level">TSN level</option> -->
+					<!-- 					<option value="cql">CQL</option> -->
+					<!-- unit_name ='Mid-West' -->
+					<!-- 					<option value="ogc">OGC</option> -->
+
+			</select> <input size="80" id="filter" value="" type="text"> <a
+				id="updateFilterButton" href="#" onclick="updateFilter()"
+				title="Apply filter">Apply</a> <a id="resetFilterButton" href="#"
+				onclick="resetFilter()" title="Reset filter">Reset</a></li>
 		</ul>
 	</div>
 	<div class="row">
@@ -426,7 +449,8 @@ table.featureInfo caption {
 										var text1 = text.replace(exp,
 												"<a href='$1'>$1</a>");
 										document.getElementById("nodelist").innerHTML = text1;
-										document.getElementById("wms_request").innerHTML += "Request: <a href='"+url+"'>"+url+"</a>" ;
+										document.getElementById("wms_request").innerHTML = "Request: <a href='"+url+"'>"
+												+ url + "</a>";
 
 										//document.getElementById('nodelist').innerHTML = xmlhttp.responseText;
 
@@ -436,9 +460,6 @@ table.featureInfo caption {
 								}
 								xmlhttp.open(method, url, true);
 								xmlhttp.send();
-								
-								
-								
 
 							});
 
@@ -527,6 +548,12 @@ table.featureInfo caption {
 				if (!supportsFiltering) {
 					return;
 				}
+
+				var filterTsnVersion = document
+						.getElementById('filtre_tsn_version').value;
+				var filterTsnLevel = document
+						.getElementById('filtre_tsn_level').value;
+
 				var filterType = document.getElementById('filterType').value;
 				var filter = document.getElementById('filter').value;
 				// by default, reset all filters
@@ -535,22 +562,65 @@ table.featureInfo caption {
 					'CQL_FILTER' : null,
 					'FEATUREID' : null
 				};
+
+				if (filterTsnVersion !== null && filterTsnVersion !== "") {
+					filterParams["CQL_FILTER"] = "idnomenclature_version ='"
+							+ filterTsnVersion + "'";
+					if (filterTsnLevel !== null  && filterTsnLevel !== "") { //filterTsnVersion AND filterTsnLevel are not null
+						filterParams["CQL_FILTER"] += " AND level ='"
+								+ filterTsnLevel + "'";
+
+					}
+				} else { //filterTsnVersion is null
+					if (filterTsnLevel !== null && filterTsnLevel !== "") {
+						filterParams["CQL_FILTER"] = "level ='"
+								+ filterTsnLevel + "'";
+					}
+				}
+
 				if (filter.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+					if (filterTsnVersion !== "" || filterTsnLevel !== "") {
+						if (filterType == "unit_name") {
+							filterParams["CQL_FILTER"] += " AND unit_name ='"
+									+ filter + "'";
+						}
+						if (filterType == "id_unit_nomenclature") {
+							filterParams["CQL_FILTER"] = "id_unit_nomenclature ='"
+									+ filter + "'";
+						}
+					} if (filterTsnVersion == "" && filterTsnLevel == "") {
+						if (filterType == "unit_name") {
+							filterParams["CQL_FILTER"] = "unit_name ='"
+									+ filter + "'";
+						}
+						
+						if (filterType == "id_unit_nomenclature") {
+							filterParams["CQL_FILTER"] = "id_unit_nomenclature ='"
+									+ filter + "'";
+						}
+					}
+					if (filterType == "fid") {
+						filterParams["FEATUREID"] = filter;
+					}
 					if (filterType == "cql") {
 						filterParams["CQL_FILTER"] = filter;
 					}
 					if (filterType == "ogc") {
 						filterParams["FILTER"] = filter;
 					}
-					if (filterType == "fid")
-						filterParams["FEATUREID"] = filter;
+
 				}
 				// merge the new filter definitions
-				map.getLayers().forEach(function(lyr) {
-					if (lyr.getSource() instanceof ol.source.ImageWMS || lyr.getSource() instanceof ol.source.TileWMS ) {
-						lyr.getSource().updateParams(filterParams);
-					}
-				});
+				map
+						.getLayers()
+						.forEach(
+								function(lyr) {
+									if (lyr.getSource() instanceof ol.source.ImageWMS
+											|| lyr.getSource() instanceof ol.source.TileWMS) {
+										lyr.getSource().updateParams(
+												filterParams);
+									}
+								});
 			}
 
 			function resetFilter() {
