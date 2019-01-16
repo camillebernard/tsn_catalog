@@ -6,10 +6,82 @@
 <link rel="stylesheet" href="tsn_catalog_fichiers/ol.css"
 	type="text/css">
 <style>
+body {
+	background: #F5F5F5;
+}
+
+/* h1 { */
+/*     font: 600, 'Raleway', sans-serif; */
+/*     color: #274054; */
+/*     text-align: center; */
+/*     text-transform: uppercase; */
+/*     letter-spacing: .5em; */
+/*     position: relative; */
+/*     width: 100%; */
+/*     margin: 10px; */
+/*     margin: 10px; */
+/* } */
+h1 {
+	font: 600 1.5em/1 'Raleway', sans-serif;
+	color: #274054;
+	text-align: center;
+	text-transform: uppercase;
+	position: relative;
+	width: 100%;
+	margin: 10px;
+	margin: 10px;
+	width: 100%;
+}
+
+span, span:after {
+	font-weight: 900;
+	color: #efedce;
+	white-space: nowrap;
+	display: inline-block;
+	position: relative;
+	letter-spacing: .1em;
+	padding: .2em 0 .25em 0;
+}
+
+span {
+	font-size: 4em;
+	z-index: 100;
+	text-shadow: .04em .04em 0 #9cb8b3;
+}
+
+span:after {
+	content: attr(data-shadow-text);
+	color: rgba(0, 0, 0, .35);
+	text-shadow: none;
+	position: absolute;
+	left: .0875em;
+	top: .0875em;
+	z-index: -1;
+	-webkit-mask-image: url(//f.cl.ly/items/1t1C0W3y040g1J172r3h/mask.png);
+}
+ /* unvisited link */
+a:link {
+  color: #0099cc;
+}
+
+/* visited link */
+a:visited {
+  color: #0099cc;
+}
+
+/* mouse over link */
+a:hover {
+  color: 	#cc9900;
+}
+
+/* selected link */
+a:active {
+  color: 	#cc0099;
+} 
 .row {
 	clear: both;
 	margin: 10px;
-	position: absolute;
+	position: relative;
 	padding: 10px;
 	height: 100%;
 }
@@ -25,7 +97,7 @@
 .column {
 	float: left;
 	padding: 10px;
-	margin: 40px;
+	margin: 20px;
 }
 
 .ol-zoom {
@@ -91,6 +163,12 @@ iframe {
 	height: 250px;
 	border: none;
 }
+
+#title_toolbar {
+	position: relative;
+	padding: 10px;
+	margin: 10px;
+}
 /* Toolbar styles */
 #toolbar {
 	position: relative;
@@ -100,8 +178,8 @@ iframe {
 
 #toolbar ul {
 	list-style: none;
-	padding: 0;
-	margin: 0;
+	padding: 10px;
+	margin: 10px;
 }
 
 #toolbar ul li {
@@ -183,96 +261,111 @@ table.featureInfo caption {
 <title>TSN Units - Catalog Service</title>
 </head>
 <body>
-	<div id="toolbar" style="display: block;">
-		<ul>
-			<li class="hide"><a>WMS version:</a> <select
-				id="wmsVersionSelector" onchange="setWMSVersion(value)">
-					<option value="1.1.1" selected="selected">1.1.1</option>
-					<option value="1.3.0">1.3.0</option>
-			</select></li>
-			<li class="hide"><a>Tiling:</a> <select id="tilingModeSelector"
-				onchange="setTileMode(value)">
-					<option value="untiled" selected="selected">Single tile</option>
-					<option value="tiled">Tiled</option>
-			</select></li>
-			<li class="hide"><a>Antialias:</a> <select
-				id="antialiasSelector" onchange="setAntialiasMode(value)">
-					<option value="full" selected="selected">Full</option>
-					<option value="text">Text only</option>
-					<option value="none">Disabled</option>
-			</select></li>
-			<li class="hide"><a>Format:</a> <select id="imageFormatSelector"
-				onchange="setImageFormat(value)">
-					<option value="image/png" selected="selected">PNG 24bit</option>
-					<option value="image/png8">PNG 8bit</option>
-					<option value="image/gif">GIF</option>
-					<option id="jpeg" value="image/jpeg">JPEG</option>
-					<option id="jpeg-png" value="image/vnd.jpeg-png">JPEG-PNG</option>
-			</select></li>
-			<li class="hide"><a>Styles:</a> <select id="imageFormatSelector"
-				onchange="setStyle(value)">
-					<option value="" selected="selected">Default</option>
-			</select></li>
-			<li class="hide"><a>Width/Height:</a> <select id="widthSelector"
-				onchange="setWidth(value)">
-					<!--
+	<div id="title_Toolbaar">
+		<div id="title_area">
+			<h1>TSN Semantic Catalog of the NUTS (Eurostat) Territorial Units in Version 1999, 2003, 2006, 2010</h1>
+		</div>
+		<div id="toolbar" style="display: block;">
+		
+		NUTS classification (Nomenclature of territorial units for statistics)  definition (Eurostat): 
+<a href="https://ec.europa.eu/eurostat/web/nuts/background">https://ec.europa.eu/eurostat/web/nuts/background</a>
+		<br/>
+		 
+		NUTS history (Eurostat): <a href="https://ec.europa.eu/eurostat/web/nuts/history">https://ec.europa.eu/eurostat/web/nuts/history</a>
+		<br/>
+		
+		TSN (Territoria Statistical Nomenclature) Ontological Model: <a href="http://purl.org/net/tsn#">TSN Ontology</a> + <a href="http://purl.org/net/tsnchange#">TSN Change Ontology</a> 
+		<br/>
+			<ul>
+				<li class="hide"><a>WMS version:</a> <select
+					id="wmsVersionSelector" onchange="setWMSVersion(value)">
+						<option value="1.1.1" selected="selected">1.1.1</option>
+						<option value="1.3.0">1.3.0</option>
+				</select></li>
+				<li class="hide"><a>Tiling:</a> <select id="tilingModeSelector"
+					onchange="setTileMode(value)">
+						<option value="untiled" selected="selected">Single tile</option>
+						<option value="tiled">Tiled</option>
+				</select></li>
+				<li class="hide"><a>Antialias:</a> <select
+					id="antialiasSelector" onchange="setAntialiasMode(value)">
+						<option value="full" selected="selected">Full</option>
+						<option value="text">Text only</option>
+						<option value="none">Disabled</option>
+				</select></li>
+				<li class="hide"><a>Format:</a> <select
+					id="imageFormatSelector" onchange="setImageFormat(value)">
+						<option value="image/png" selected="selected">PNG 24bit</option>
+						<option value="image/png8">PNG 8bit</option>
+						<option value="image/gif">GIF</option>
+						<option id="jpeg" value="image/jpeg">JPEG</option>
+						<option id="jpeg-png" value="image/vnd.jpeg-png">JPEG-PNG</option>
+				</select></li>
+				<li class="hide"><a>Styles:</a> <select
+					id="imageFormatSelector" onchange="setStyle(value)">
+						<option value="" selected="selected">Default</option>
+				</select></li>
+				<li class="hide"><a>Width/Height:</a> <select
+					id="widthSelector" onchange="setWidth(value)">
+						<!--
              These values come from a statistics of the viewable area given a certain screen area
              (but have been adapted a litte, simplified numbers, added some resolutions for wide screen)
              You can find them here: http://www.evolt.org/article/Real_World_Browser_Size_Stats_Part_II/20/2297/
              -->
-					<option value="auto" selected="selected">Auto</option>
-					<option value="600">600</option>
-					<option value="750">750</option>
-					<option value="950">950</option>
-					<option value="1000">1000</option>
-					<option value="1200">1200</option>
-					<option value="1400">1400</option>
-					<option value="1600">1600</option>
-					<option value="1900">1900</option>
-			</select> <select id="heigthSelector" onchange="setHeight(value)">
-					<option value="auto" selected="selected">Auto</option>
-					<option value="300">300</option>
-					<option value="400">400</option>
-					<option value="500">500</option>
-					<option value="600">600</option>
-					<option value="700">700</option>
-					<option value="800">800</option>
-					<option value="900">900</option>
-					<option value="1000">1000</option>
-			</select></li>
-			<li><b>Filters:</b></li>
-			<li><a>TSN version:</a> <select id="filtre_tsn_version">
-					<option value="">-- select an option --</option>
-					<option value="1999">NUTS 1999</option>
-					<option value="2003">NUTS 2003</option>
-					<option value="2006">NUTS 2006</option>
-					<option value="2010">NUTS 2010</option>
-			</select></li>
+						<option value="auto" selected="selected">Auto</option>
+						<option value="600">600</option>
+						<option value="750">750</option>
+						<option value="950">950</option>
+						<option value="1000">1000</option>
+						<option value="1200">1200</option>
+						<option value="1400">1400</option>
+						<option value="1600">1600</option>
+						<option value="1900">1900</option>
+				</select> <select id="heigthSelector" onchange="setHeight(value)">
+						<option value="auto" selected="selected">Auto</option>
+						<option value="300">300</option>
+						<option value="400">400</option>
+						<option value="500">500</option>
+						<option value="600">600</option>
+						<option value="700">700</option>
+						<option value="800">800</option>
+						<option value="900">900</option>
+						<option value="1000">1000</option>
+				</select></li>
+				<li><b>Filters:</b></li>
+				<li><a>TSN version:</a> <select id="filtre_tsn_version">
+						<option value="">-- select an option --</option>
+						<option value="1999">NUTS 1999</option>
+						<option value="2003">NUTS 2003</option>
+						<option value="2006">NUTS 2006</option>
+						<option value="2010">NUTS 2010</option>
+				</select></li>
 
-			<li><a>TSN level:</a> <select id="filtre_tsn_level">
-					<option value="">-- select an option --</option>
-					<option value="-1">NUTS Level Territory</option>
-					<option value="0">NUTS Level 0 (states regions)</option>
-					<option value="1">NUTS Level 1 (major socio-economic
-						regions)</option>
-					<option value="2">NUTS Level 2 (basic regions)</option>
-					<option value="3">NUTS Level 3 (small regions )</option>
-			</select></li>
-			<li><select id="filterType">
-					<option value="fid" selected="selected">Unit Version ID</option>
-					<option value="id_unit_nomenclature">Unit NUTS ID</option>
-					<option value="unit_name">Unit name</option>
-					<!-- 					<option value="idnomenclature_version">TSN version</option> -->
-					<!-- 					<option value="level">TSN level</option> -->
-					<!-- 					<option value="cql">CQL</option> -->
-					<!-- unit_name ='Mid-West' -->
-					<!-- 					<option value="ogc">OGC</option> -->
+				<li><a>TSN level:</a> <select id="filtre_tsn_level">
+						<option value="">-- select an option --</option>
+						<option value="-1">NUTS Level Territory</option>
+						<option value="0">NUTS Level 0 (states regions)</option>
+						<option value="1">NUTS Level 1 (major socio-economic
+							regions)</option>
+						<option value="2">NUTS Level 2 (basic regions)</option>
+						<option value="3">NUTS Level 3 (small regions )</option>
+				</select></li>
+				<li><select id="filterType">
+						<option value="fid" selected="selected">tsn_unit_id</option>
+						<option value="unit_code">unit_code</option>
+						<option value="unit_name">unit name</option>
+						<!-- 					<option value="nuts_version">TSN version</option> -->
+						<!-- 					<option value="level">TSN level</option> -->
+						<!-- 					<option value="cql">CQL</option> -->
+						<!-- unit_name ='Mid-West' -->
+						<!-- 					<option value="ogc">OGC</option> -->
 
-			</select> <input size="80" id="filter" value="" type="text"> <a
-				id="updateFilterButton" href="#" onclick="updateFilter()"
-				title="Apply filter">Apply</a> <a id="resetFilterButton" href="#"
-				onclick="resetFilter()" title="Reset filter">Reset</a></li>
-		</ul>
+				</select> <input size="80" id="filter" value="" type="text"> <a
+					id="updateFilterButton" href="#" onclick="updateFilter()"
+					title="Apply filter">Apply</a> <a id="resetFilterButton" href="#"
+					onclick="resetFilter()" title="Reset filter">Reset</a></li>
+			</ul>
+		</div>
 	</div>
 	<div class="row">
 		<div class="column">
@@ -300,6 +393,7 @@ table.featureInfo caption {
 				<!-- 			</div> -->
 				<!-- 		</div> -->
 			</div>
+			<div id="legend"> <img src="tsn_catalog_fichiers/legend_nuts_layer.png" alt="legend nuts layer"> </div>
 		</div>
 		<div class="column">
 			<div id="wrapper">
@@ -311,8 +405,9 @@ table.featureInfo caption {
 					<iframe seamless="" src=""></iframe>
 				</div>
 			</div>
+			<div id="wms_request"></div>
 		</div>
-		<div id="wms_request"></div>
+
 		<script type="text/javascript">
 			var pureCoverage = false;
 			// if this is just a coverage or a group of them, disable a few items,
@@ -564,9 +659,9 @@ table.featureInfo caption {
 				};
 
 				if (filterTsnVersion !== null && filterTsnVersion !== "") {
-					filterParams["CQL_FILTER"] = "idnomenclature_version ='"
+					filterParams["CQL_FILTER"] = "nuts_version ='"
 							+ filterTsnVersion + "'";
-					if (filterTsnLevel !== null  && filterTsnLevel !== "") { //filterTsnVersion AND filterTsnLevel are not null
+					if (filterTsnLevel !== null && filterTsnLevel !== "") { //filterTsnVersion AND filterTsnLevel are not null
 						filterParams["CQL_FILTER"] += " AND level ='"
 								+ filterTsnLevel + "'";
 
@@ -584,23 +679,24 @@ table.featureInfo caption {
 							filterParams["CQL_FILTER"] += " AND unit_name ='"
 									+ filter + "'";
 						}
-						if (filterType == "id_unit_nomenclature") {
-							filterParams["CQL_FILTER"] = "id_unit_nomenclature ='"
+						if (filterType == "unit_code") {
+							filterParams["CQL_FILTER"] = "unit_code ='"
 									+ filter + "'";
 						}
-					} if (filterTsnVersion == "" && filterTsnLevel == "") {
+					}
+					if (filterTsnVersion == "" && filterTsnLevel == "") {
 						if (filterType == "unit_name") {
 							filterParams["CQL_FILTER"] = "unit_name ='"
 									+ filter + "'";
 						}
-						
-						if (filterType == "id_unit_nomenclature") {
-							filterParams["CQL_FILTER"] = "id_unit_nomenclature ='"
+
+						if (filterType == "unit_code") {
+							filterParams["CQL_FILTER"] = "unit_code ='"
 									+ filter + "'";
 						}
 					}
 					if (filterType == "fid") {
-						filterParams["FEATUREID"] = filter;
+						filterParams["FEATUREID"] = "unit_version."+ filter ;
 					}
 					if (filterType == "cql") {
 						filterParams["CQL_FILTER"] = filter;
