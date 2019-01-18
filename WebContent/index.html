@@ -438,7 +438,7 @@ table.featureInfo caption {
 			var untiled = new ol.layer.Image({
 				source : new ol.source.ImageWMS({
 					ratio : 1,
-					url : 'http://127.0.0.1:8080/geoserver/nuts/wms',
+					url : 'http://lig-tdcge.imag.fr/geoserver/nuts/wms',
 					params : {
 						'FORMAT' : format,
 						'VERSION' : '1.1.1',
@@ -450,7 +450,7 @@ table.featureInfo caption {
 			var tiled = new ol.layer.Tile({
 				visible : false,
 				source : new ol.source.TileWMS({
-					url : 'http://127.0.0.1:8080/geoserver/nuts/wms',
+					url : 'http://lig-tdcge.imag.fr/geoserver/nuts/wms',
 					params : {
 						'FORMAT' : format,
 						'VERSION' : '1.1.1',

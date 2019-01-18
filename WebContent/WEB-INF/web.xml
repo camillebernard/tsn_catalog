@@ -3,8 +3,9 @@
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
+  <display-name>tsn-catalog</display-name>
   <welcome-file-list>
-    <welcome-file>tsn_catalog.html</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 <filter>
         <filter-name>CorsFilter</filter-name>
